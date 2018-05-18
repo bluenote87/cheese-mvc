@@ -9,9 +9,16 @@
 
     <p th:unless="${cheeses} and ${cheeses.size()}">no cheese :(</p>
 
-    <ul th:each="cheese : ${cheeses}">
+    <!-- <ul th:each="cheese : ${cheeses}">
         <li th:text="${cheese.key + ': ' + cheese.value}"></li>
-    </ul>
+    </ul> -->
+
+    <div th:each="cheese : ${cheeses}">
+        <ul>
+            <li th:text="${cheese.key}"></li>
+                <ul><li th:text="${cheese.value}"></li></ul>
+        </ul>
+    </div>
 
 </body>
 </html>
