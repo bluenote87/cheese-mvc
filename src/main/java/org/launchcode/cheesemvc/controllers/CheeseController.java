@@ -13,10 +13,12 @@ import java.util.ArrayList;
 @RequestMapping("cheese")
 public class CheeseController {
 
+    static ArrayList<Cheese> cheeses = new ArrayList<>();
+
     @RequestMapping(value = "")
     public String index(Model model) {
 
-        model.addAttribute("cheeses", Cheese.getCheeseList());
+        model.addAttribute("cheeses", cheeses);
         model.addAttribute("title", "My Cheese Emporium");
         return "cheese/index";
     }
@@ -28,7 +30,8 @@ public class CheeseController {
     }
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String processAddCheeseForm(@RequestParam String cheeseName, @RequestParam String cheeseDesc) {
-        Cheese.setTheCheese(cheeseName, cheeseDesc);
+        Cheese newCheese = new Cheese(cheeseName, cheeseDesc);
+        cheeses.add(newCheese);
         // Redirect to /cheese
         return "redirect:";
     }
@@ -37,7 +40,7 @@ public class CheeseController {
     @RequestMapping(value = "remove", method = RequestMethod.GET)
     public String showRemoveForm(Model model) {
         model.addAttribute("title", "Remove Cheese");
-        model.addAttribute("cheeses", Cheese.getCheeseList());
+        model.addAttribute("cheeses", cheeses);
 
         return "cheese/remove";
 
@@ -48,7 +51,7 @@ public class CheeseController {
     public String processRemoveForm(@RequestParam ArrayList<String> cheese) {
 
         for(String c : cheese) {
-            Cheese.removeThatCheese(c);
+            cheeses.remove(c);
         }
 
         return "redirect:";
