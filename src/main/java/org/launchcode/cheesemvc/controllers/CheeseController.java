@@ -4,10 +4,7 @@ import org.launchcode.cheesemvc.models.Cheese;
 import org.launchcode.cheesemvc.models.CheeseData;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 
@@ -56,4 +53,30 @@ public class CheeseController {
         return "redirect:";
     }
 
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.GET)
+    public String displayEditForm(Model model, @PathVariable int cheeseId) {
+        Cheese editCheese = CheeseData.getById(cheeseId);
+        String cheeseName = editCheese.getName();
+        Integer cheeseIdentification = editCheese.getCheeseId();
+        String aCheese = cheeseIdentification.toString();
+        model.addAttribute("title", "Edit Cheese " + cheeseName + " (id=" + aCheese + ")");
+        model.addAttribute("cheese", CheeseData.getById(cheeseId));
+
+        return "cheese/edit";
+    }
+
+    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
+    public String processEditForm(int cheeseId, String name, String description) {
+        Cheese oldCheese = CheeseData.getById(cheeseId);
+        oldCheese.setName(name);
+        oldCheese.setDescription(description);
+        return "redirect:";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public String returnToIndex(Model model) {
+        model.addAttribute("cheeses", CheeseData.getAll());
+        model.addAttribute("title", "My Cheese Emporium");
+        return "cheese/index";
+    }
 }
