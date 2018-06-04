@@ -4,10 +4,26 @@ public class Cheese {
 
     private String name;
     private String description;
+    private int cheeseId;
+    private static int nextID = 1;
 
     public Cheese(String aName, String aDescription) {
+        this();
         this.name = aName;
         this.description = aDescription;
+    }
+
+    public Cheese() {
+        cheeseId = nextID;
+        nextID++;
+    }
+
+    public int getCheeseId() {
+        return cheeseId;
+    }
+
+    public void setCheeseId(int cheeseId) {
+        this.cheeseId = cheeseId;
     }
 
     public String getName() {
