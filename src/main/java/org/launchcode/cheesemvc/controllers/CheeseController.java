@@ -60,12 +60,12 @@ public class CheeseController {
         Integer cheeseIdentification = editCheese.getCheeseId();
         String aCheese = cheeseIdentification.toString();
         model.addAttribute("title", "Edit Cheese " + cheeseName + " (id=" + aCheese + ")");
-        model.addAttribute("cheese", CheeseData.getById(cheeseId));
+        model.addAttribute("cheese", editCheese);
 
         return "cheese/edit";
     }
 
-    @RequestMapping(value = "edit/{cheeseId}", method = RequestMethod.POST)
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
     public String processEditForm(int cheeseId, String name, String description) {
         Cheese oldCheese = CheeseData.getById(cheeseId);
         oldCheese.setName(name);
@@ -73,10 +73,4 @@ public class CheeseController {
         return "redirect:";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.GET)
-    public String returnToIndex(Model model) {
-        model.addAttribute("cheeses", CheeseData.getAll());
-        model.addAttribute("title", "My Cheese Emporium");
-        return "cheese/index";
-    }
 }

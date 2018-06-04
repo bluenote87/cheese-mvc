@@ -6,7 +6,7 @@
 <h1 th:text="${title}">Default Title</h1>
 <nav th:replace="fragments :: navigation"></nav>
 
-<form method="post" action="" style="max-width:600px;">
+<form method="post" action="/cheese/edit" style="max-width:600px;">
     <div class="form-group">
         <label for="name-field"><b>Name</b> to edit:</label>
         <input class="form-control" id="name-field" type="text" name="name" th:value="${cheese.name}" />
