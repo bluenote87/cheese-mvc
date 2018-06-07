@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 public class Cheese {
 
     @NotNull
-    @Size(min=3, max=15)
+    @Size(min=3, max=15, message = "The name of this cheese should be between 3 and 15 characters")
     private String name;
 
     @NotNull
