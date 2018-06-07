@@ -34,6 +34,7 @@ public class Cheese {
     public Cheese() {
         cheeseId = nextID;
         nextID++;
+
     }
 
     public int getCheeseId() {
@@ -74,6 +75,10 @@ public class Cheese {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public static void setNextID(int nextID) {
+        Cheese.nextID=nextID;
     }
 
 }

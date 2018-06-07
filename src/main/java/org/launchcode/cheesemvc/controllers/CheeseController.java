@@ -15,6 +15,9 @@ import java.util.ArrayList;
 @RequestMapping("cheese")
 public class CheeseController {
 
+    private static boolean isCheeseMade = false;
+    private static int lastId;
+
     @RequestMapping(value = "")
     public String index(Model model) {
 
@@ -26,7 +29,16 @@ public class CheeseController {
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String displayAddCheeseForm(Model model) {
         model.addAttribute("title", "Add Cheese");
-        model.addAttribute(new Cheese());
+        if (isCheeseMade == false) {
+            Cheese aCheese = new Cheese();
+            model.addAttribute(aCheese);
+            lastId = aCheese.getCheeseId();
+            isCheeseMade = true;
+        } else {
+            Cheese.setNextID(lastId);
+            model.addAttribute(new Cheese());
+        }
+
         model.addAttribute("cheeseTypes", CheeseType.values());
         return "cheese/add";
     }
@@ -41,6 +53,7 @@ public class CheeseController {
         }
 
         CheeseData.add(newCheese);
+        isCheeseMade = false;
         // Redirect to /cheese
         return "redirect:";
     }
