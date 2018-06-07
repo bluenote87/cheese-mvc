@@ -9,12 +9,12 @@
 <form method="post" action="/cheese/edit" style="max-width:600px;" th:object="${cheese}">
     <div class="form-group">
         <label th:for="name"><b>Name</b> to edit:</label>
-        <input class="form-control" th:field="*{name}" /> <!-- th:text="*{name}" -->
+        <input class="form-control" th:field="*{name}" />
         <span th:errors="*{name}" class="error"></span>
     </div>
     <div class="form-group">
         <label th:for="description"><b>Description</b> to edit:</label>
-        <input class="form-control" th:field="*{description}" /> <!--  th:text="*{description}" -->
+        <input class="form-control" th:field="*{description}" />
         <span th:errors="*{description}" class="error"></span>
     </div>
     <div class="form-group">
@@ -25,6 +25,12 @@
                     th:value="${cheeseType}"
                     th:selected="${cheeseType} == *{type.name}"></option>
         </select>
+    </div>
+    <div class="form-group">
+        <label th:for="rating"><b>Rating</b> to edit:</label>
+        <input class="form-control" th:field="*{rating}" />
+        <label th:for="rating">Out Of Five</label>
+        <span th:errors="*{rating}" class="error"></span>
     </div>
     <input type="hidden" th:field="*{cheeseId}" />
     <input type="submit" value="Edit Cheese" />
