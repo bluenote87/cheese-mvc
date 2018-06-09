@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class CheeseData {
 
-    static ArrayList<Cheese> cheeses = new ArrayList<>();
+    private static ArrayList<Cheese> cheeses = new ArrayList<>();
+    public static int nextId = 1;
 
     //getAll
     public static ArrayList<Cheese> getAll() {
@@ -13,7 +14,10 @@ public class CheeseData {
 
     //add
     public static void add(Cheese newCheese) {
+
         cheeses.add(newCheese);
+        newCheese.setCheeseId(nextId);
+        nextId++;
     }
 
     //remove

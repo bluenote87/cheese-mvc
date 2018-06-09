@@ -23,7 +23,7 @@ public class Cheese {
     private int rating;
 
     private int cheeseId;
-    private static int nextID = 1;
+    //protected static int nextID;
 
     public Cheese(String aName, String aDescription) {
         this();
@@ -32,8 +32,8 @@ public class Cheese {
     }
 
     public Cheese() {
-        cheeseId = nextID;
-        nextID++;
+        //cheeseId = nextID;
+        //nextID++;
 
     }
 
@@ -75,10 +75,6 @@ public class Cheese {
 
     public void setRating(int rating) {
         this.rating = rating;
-    }
-
-    public static void setNextID(int nextID) {
-        Cheese.nextID=nextID;
     }
 
 }

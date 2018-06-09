@@ -36,11 +36,18 @@ public class CheeseController {
 
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute(newCheese);
             model.addAttribute("cheeseTypes", CheeseType.values());
             return "cheese/add";
         }
+        Cheese addCheese = new Cheese();
 
-        CheeseData.add(newCheese);
+        addCheese.setName(newCheese.getName());
+        addCheese.setDescription((newCheese.getDescription()));
+        addCheese.setRating(newCheese.getRating());
+        addCheese.setType(newCheese.getType());
+
+        CheeseData.add(addCheese);
         // Redirect to /cheese
         return "redirect:";
     }
